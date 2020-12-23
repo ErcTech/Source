@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"net/http"
 	"strconv"
-
-	erctech "github.com/erctech/categoria"
 )
 
 type CategoriaPesquisa struct {
@@ -20,7 +18,7 @@ type Categoria struct {
 
 func PesquisarCategorias(aPesquisaCategoria CategoriaPesquisa) (*[]Categoria, *Erro) {
 	var resultado []Categoria
-	db := GetDB()
+	db := erctech.GetDB()
 
 	var xFiltros []string
 
