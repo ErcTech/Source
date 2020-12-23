@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 	"strconv"
+
+	erctech "github.com/erctech/categoria"
 )
 
 type CategoriaPesquisa struct {
@@ -16,8 +18,8 @@ type Categoria struct {
 	Nome string `json:"Nome"`
 }
 
-func PesquisarCategorias(aPesquisaCategoria CategoriaPesquisa) (*[]Plano, *Erro) {
-	var resultado []Plano
+func PesquisarCategorias(aPesquisaCategoria CategoriaPesquisa) (*[]Categoria, *Erro) {
+	var resultado []Categoria
 	db := GetDB()
 
 	var xFiltros []string
@@ -65,15 +67,15 @@ func PesquisarCategorias(aPesquisaCategoria CategoriaPesquisa) (*[]Plano, *Erro)
 func restCategoriaPesquisar(w http.ResponseWriter, r *http.Request) {
 	vPesquisa := CategoriaPesquisa{}
 	vPesquisa.Nome = r.FormValue("Nome")
-	vPesquisa.Id, _ = strconv.Atoi(r.FormValue("Id")) // strconv.Atoi(r.Header.Get("CodPlanoGrupo"))
+	vPesquisa.Id, _ = strconv.Atoi(r.FormValue("Id"))
 
-	vCategorias, err := bemtevi.PesquisarCategorias(vPesquisa)
+	vCategorias, err := erctech.PesquisarCategorias(vPesquisa)
 	if err != nil {
 
 		w.WriteHeader(400)
 		json.NewEncoder(w).Encode(err)
 	} else {
 		w.WriteHeader(200)
-		json.NewEncoder(w).Encode(xPlanos)
+		json.NewEncoder(w).Encode(vCategorias)
 	}
 }
