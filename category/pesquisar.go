@@ -16,7 +16,7 @@ type Categoria struct {
 	Nome string `json:"Nome"`
 }
 
-func PesquisarCategorias(aPesquisaCategoria CategoriaPesquisa) (*[]Categoria, *Erro) {
+func PesquisarCategorias(aPesquisaCategoria CategoriaPesquisa) (*[]Categoria, *erctech.Erro) {
 	var resultado []Categoria
 	db := erctech.GetDB()
 
