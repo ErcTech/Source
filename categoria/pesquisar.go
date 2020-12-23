@@ -62,7 +62,7 @@ func PesquisarCategorias(aPesquisaCategoria CategoriaPesquisa) (*[]Categoria, *E
 	return &resultado, nil
 }
 
-func restCategoriaPesquisar(w http.ResponseWriter, r *http.Request) {
+func RestCategoriaPesquisar(w http.ResponseWriter, r *http.Request) {
 	vPesquisa := CategoriaPesquisa{}
 	vPesquisa.Nome = r.FormValue("Nome")
 	vPesquisa.Id, _ = strconv.Atoi(r.FormValue("Id"))
